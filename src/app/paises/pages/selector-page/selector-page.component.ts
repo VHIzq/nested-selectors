@@ -54,10 +54,12 @@ export class SelectorPageComponent implements OnInit {
           this.cargando = true;
           //this.miFormulario.get('frontera')?.enable();
         }),
-        switchMap( codigo => this.paisesServices.getPaisPorCodigo( codigo ))
+        switchMap( codigo => this.paisesServices.getPaisPorCodigo( codigo )),
+        switchMap( pais => this.paisesServices.getPaisesPorCodigos( pais?.borders! ))
       )
-      .subscribe( pais  => {
-        this.fronteras = pais?.borders || [];
+      .subscribe( paises  => {
+        //this.fronteras = pais?.borders || [];
+        this.fronteras = paises;
         this.cargando = false;
       });
 
